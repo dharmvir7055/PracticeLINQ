@@ -1,9 +1,13 @@
-﻿namespace ProjectionOperations
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace ProjectionOperations
 {
     internal partial class Program
     {
         private static void Main(string[] args)
         {
+            //Projection: refers to the operation of transforming an object into a new form that often consists only of those properties subsequently used.By using projection, you can construct a new type that is built from each object.You can project a property and perform a mathematical function on it.You can also project the original object without changing it.
+
             //Method names    Description                                                                                                               C# query expression syntax	                                                More information
             //Select          Projects values that are based on a transform function.	                                                                select                                                                      Enumerable.Select Queryable.Select
             //SelectMany      Projects sequences of values that are based on a transform function and then flattens them into one sequence.         	Use multiple from clauses                                                   Enumerable.SelectMany Queryable.SelectMany
