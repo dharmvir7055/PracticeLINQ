@@ -8,10 +8,6 @@
 
 //inner join- The inner join return records that have matching values in both collections.
 
-using System.Drawing;
-using System.Security.Cryptography;
-using System.Threading.Channels;
-
 public partial class Program
 {
     public static void Main(string[] args)
@@ -233,9 +229,9 @@ public partial class Program
         //from word in phares.Split(" ")
         //select word;
 
-        var words2 = phrases.SelectMany(phrase =>  
+        var words2 = phrases.SelectMany(phrase =>
             phrase.Split("")
-        ).SelectMany(word=>word.ToList()).Count(s=>s.Equals('a'));
+        ).SelectMany(word => word.ToList()).Count(s => s.Equals('a'));
 
         //foreach (var charItem in words2)
         //{
@@ -244,9 +240,9 @@ public partial class Program
 
 
 
-                #endregion
+        #endregion
 
-                #region Perform left outer joins
+        #region Perform left outer joins
 
         var outerJoin = from student in students
                         join department in departments on student.DepartmentID equals department.ID into studentgroup
@@ -271,7 +267,7 @@ public partial class Program
     {
         student.student.FirstName,
         student.student.LastName,
-        Department = department?.Name??string.Empty
+        Department = department?.Name ?? string.Empty
     });
 
         foreach (var v in outerjoinWithMethod)
