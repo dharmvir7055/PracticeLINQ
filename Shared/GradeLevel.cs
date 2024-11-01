@@ -9,12 +9,12 @@
 //inner join- The inner join return records that have matching values in both collections.
 
 
-
 //Classes and Data
+
 public enum GradeLevel
 {
     FirstYear = 1,
     SecondYear,
     ThirdYear,
     FourthYear
-};
+}

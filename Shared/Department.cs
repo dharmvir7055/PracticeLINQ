@@ -9,8 +9,6 @@
 //inner join- The inner join return records that have matching values in both collections.
 
 
-
-
 public class Department
 {
     public string Name { get; init; }

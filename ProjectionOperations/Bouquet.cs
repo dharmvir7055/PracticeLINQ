@@ -1,10 +1,9 @@
-﻿namespace ProjectionOperations
+﻿namespace ProjectionOperations;
+
+internal partial class Program
 {
-    internal partial class Program
+    private class Bouquet
     {
-        class Bouquet
-        {
-            public required List<string> Flowers { get; init; }
-        }
+        public required List<string> Flowers { get; init; }
     }
 }

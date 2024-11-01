@@ -8,7 +8,7 @@
 
 //inner join- The inner join return records that have matching values in both collections.
 
-public partial class Program
+public class Program
 {
     public static void Main(string[] args)
     {
@@ -25,43 +25,34 @@ public partial class Program
         //basic join
 
         var query = from student in Sources.Students
-                    join department in Sources.Departments on student.DepartmentID equals department.ID
-                    select new { Name = $"{student.FirstName} {student.LastName}", DepartmentName = department.Name };
+            join department in Sources.Departments on student.DepartmentID equals department.ID
+            select new { Name = $"{student.FirstName} {student.LastName}", DepartmentName = department.Name };
 
-        foreach (var item in query)
-        {
-            Console.WriteLine($"{item.Name} - {item.DepartmentName}");
-        }
+        foreach (var item in query) Console.WriteLine($"{item.Name} - {item.DepartmentName}");
 
         //method syntax
 
         var methodSyn = Sources.Students.Join(Sources.Departments, st => st.DepartmentID, dp => dp.ID,
             (student, department) => new
-            { Name = $"{student.FirstName} {student.LastName}", DepartmentName = department.Name });
+                { Name = $"{student.FirstName} {student.LastName}", DepartmentName = department.Name });
 
-        foreach (var item in methodSyn)
-        {
-            Console.WriteLine($"{item.Name} - {item.DepartmentName}");
-        }
+        foreach (var item in methodSyn) Console.WriteLine($"{item.Name} - {item.DepartmentName}");
 
         #endregion Basic join
 
         #region Group join
 
         IEnumerable<IEnumerable<Student>> studentGroups = from department in Sources.Departments
-                                                          join student in Sources.Students on department.ID equals student.DepartmentID into studentGroup
-                                                          select studentGroup;
+            join student in Sources.Students on department.ID equals student.DepartmentID into studentGroup
+            select studentGroup;
 
-        foreach (IEnumerable<Student> studentGroup in studentGroups)
+        foreach (var studentGroup in studentGroups)
         {
             Console.WriteLine("Group");
-            foreach (Student student in studentGroup)
-            {
-                Console.WriteLine($"  - {student.FirstName}, {student.LastName}");
-            }
+            foreach (var student in studentGroup) Console.WriteLine($"  - {student.FirstName}, {student.LastName}");
         }
 
-        IEnumerable<DeparmentStudentGroup> departmentStudentGroups = Sources.Departments.GroupJoin(Sources.Students,
+        var departmentStudentGroups = Sources.Departments.GroupJoin(Sources.Students,
             department => department.ID, student => student.DepartmentID,
             (deparment, students) => new DeparmentStudentGroup(deparment.Name, students));
 
@@ -69,9 +60,7 @@ public partial class Program
         {
             Console.WriteLine($"\nGroup:{deparmentStudentGroup.Name}\nStudents:\n");
             foreach (var student in deparmentStudentGroup.Students)
-            {
                 Console.WriteLine($"Id:{student.ID},Name:{student.LastName}");
-            }
         }
 
         #endregion Group join
@@ -86,18 +75,16 @@ public partial class Program
 
         //Single key join
         var innerquery = from department in departments
-                         join teacher in teachers on department.TeacherID equals teacher.ID
-                         select new
-                         {
-                             DepartmentName = department.Name,
-                             TeacherName = $"{teacher.First} {teacher.Last}"
-                         };
+            join teacher in teachers on department.TeacherID equals teacher.ID
+            select new
+            {
+                DepartmentName = department.Name,
+                TeacherName = $"{teacher.First} {teacher.Last}"
+            };
 
         foreach (var departmentAndTeacher in innerquery)
-        {
             Console.WriteLine(
                 $"{departmentAndTeacher.DepartmentName} is managed by {departmentAndTeacher.TeacherName}");
-        }
 
         var methodinnerQuery = teachers
             .Join(departments, teacher => teacher.ID, department => department.TeacherID,
@@ -105,10 +92,8 @@ public partial class Program
                     new { DepartmentName = department.Name, TeacherName = $"{teacher.First} {teacher.Last}" });
 
         foreach (var departmentAndTeacher in methodinnerQuery)
-        {
             Console.WriteLine(
                 $"{departmentAndTeacher.DepartmentName} is managed by {departmentAndTeacher.TeacherName}");
-        }
 
         //Composite key join
 
@@ -116,10 +101,7 @@ public partial class Program
             teacher => new { FirstName = teacher.First, LastName = teacher.Last },
             student => new { student.FirstName, student.LastName },
             (teacher, student) => $"{teacher.First}|{student.LastName}");
-        foreach (var item in compositeKeyJoinResult)
-        {
-            Console.WriteLine(item);
-        }
+        foreach (var item in compositeKeyJoinResult) Console.WriteLine(item);
 
         // Join the two data sources based on a composite key consisting of first and last name,
         // to determine which employees are also students.
@@ -136,11 +118,8 @@ public partial class Program
             }
             select teacher.First + " " + teacher.Last;
 
-        string result = "The following people are both teachers and students:\r\n";
-        foreach (string name in compositeKeyJoinResult2)
-        {
-            result += $"{name}\r\n";
-        }
+        var result = "The following people are both teachers and students:\r\n";
+        foreach (var name in compositeKeyJoinResult2) result += $"{name}\r\n";
 
         Console.Write(result);
 
@@ -156,20 +135,18 @@ public partial class Program
         // with the students studying in that department.
 
         var multijoinquery = from student in students
-                             join department in departments on student.DepartmentID equals department.ID
-                             join teacher in teachers on department.TeacherID equals teacher.ID
-                             select new
-                             {
-                                 StudentName = $"{student.FirstName} {student.LastName}",
-                                 DepartmentName = department.Name,
-                                 TeacherName = $"{teacher.First} {teacher.Last}"
-                             };
+            join department in departments on student.DepartmentID equals department.ID
+            join teacher in teachers on department.TeacherID equals teacher.ID
+            select new
+            {
+                StudentName = $"{student.FirstName} {student.LastName}",
+                DepartmentName = department.Name,
+                TeacherName = $"{teacher.First} {teacher.Last}"
+            };
 
         foreach (var obj in multijoinquery)
-        {
             Console.WriteLine(
                 $"""The student "{obj.StudentName}" studies in the {obj.DepartmentName} department run  by "{obj.TeacherName}".""");
-        }
 
         var multijoinquery2 = students
             .Join(departments, s => s.DepartmentID, dep => dep.ID, (stu, dep) => new { stu, dep })
@@ -177,10 +154,7 @@ public partial class Program
                 $"The student {stuDep.stu.FirstName} studies in the {stuDep.dep.Name} department run  by {teacher.First}"
             );
 
-        foreach (var item in multijoinquery2)
-        {
-            Console.WriteLine(item);
-        }
+        foreach (var item in multijoinquery2) Console.WriteLine(item);
 
         #endregion Multiple join
 
@@ -198,10 +172,7 @@ public partial class Program
                 StudentName = $"{subStudent.FirstName} {subStudent.LastName}"
             };
         Console.WriteLine("Inner join using GroupJoin():");
-        foreach (var v in query1)
-        {
-            Console.WriteLine($"{v.DepartmentName} - {v.StudentName}");
-        }
+        foreach (var v in query1) Console.WriteLine($"{v.DepartmentName} - {v.StudentName}");
 
         var queryMethod1 = departments
             .GroupJoin(students, d => d.ID, s => s.DepartmentID, (department, gj) => new { department, gj })
@@ -215,14 +186,12 @@ public partial class Program
                 });
 
         Console.WriteLine("Inner join using GroupJoin():");
-        foreach (var v in queryMethod1)
-        {
-            Console.WriteLine($"{v.DepartmentName} - {v.StudentName}");
-        }
+        foreach (var v in queryMethod1) Console.WriteLine($"{v.DepartmentName} - {v.StudentName}");
 
         #endregion Inner join by using grouped join
 
         #region Select manyExamples
+
         List<string> phrases = ["an apple a day", "the quick brown fox"];
 
         //var words1=from phares in phrases
@@ -238,44 +207,35 @@ public partial class Program
         //    Console.WriteLine(charItem);
         //}
 
-
-
         #endregion
 
         #region Perform left outer joins
 
         var outerJoin = from student in students
-                        join department in departments on student.DepartmentID equals department.ID into studentgroup
-                        from subgroup in studentgroup.DefaultIfEmpty()
-                        select new
-                        {
-                            student.FirstName,
-                            student.LastName,
-                            Department = subgroup?.Name ?? string.Empty
-                        };
+            join department in departments on student.DepartmentID equals department.ID into studentgroup
+            from subgroup in studentgroup.DefaultIfEmpty()
+            select new
+            {
+                student.FirstName,
+                student.LastName,
+                Department = subgroup?.Name ?? string.Empty
+            };
 
-        foreach (var item in outerJoin)
-        {
-            Console.WriteLine($"{item.FirstName}-{item.LastName}-{item.Department}");
-        }
+        foreach (var item in outerJoin) Console.WriteLine($"{item.FirstName}-{item.LastName}-{item.Department}");
 
         //method syntax
 
-        var outerjoinWithMethod = students.GroupJoin(departments, student => student.DepartmentID, department => department.ID,
-    (student, departmentList) => new { student, subgroup = departmentList.AsQueryable() })
-    .SelectMany(joinedSet => joinedSet.subgroup.DefaultIfEmpty(), (student, department) => new
-    {
-        student.student.FirstName,
-        student.student.LastName,
-        Department = department?.Name ?? string.Empty
-    });
+        var outerjoinWithMethod = students.GroupJoin(departments, student => student.DepartmentID,
+                department => department.ID,
+                (student, departmentList) => new { student, subgroup = departmentList.AsQueryable() })
+            .SelectMany(joinedSet => joinedSet.subgroup.DefaultIfEmpty(), (student, department) => new
+            {
+                student.student.FirstName,
+                student.student.LastName,
+                Department = department?.Name ?? string.Empty
+            });
 
-        foreach (var v in outerjoinWithMethod)
-        {
-            Console.WriteLine($"{v.FirstName:-15} {v.LastName:-15}: {v.Department}");
-        }
-
-
+        foreach (var v in outerjoinWithMethod) Console.WriteLine($"{v.FirstName:-15} {v.LastName:-15}: {v.Department}");
 
         #endregion Perform left outer joins
     }
@@ -283,14 +243,14 @@ public partial class Program
 
 internal class DeparmentStudentGroup
 {
-    public string Name { get; }
-    public IEnumerable<Student> Students { get; }
-
     public DeparmentStudentGroup(string name, IEnumerable<Student> students)
     {
         Name = name;
         Students = students;
     }
+
+    public string Name { get; }
+    public IEnumerable<Student> Students { get; }
 
     public override bool Equals(object? obj)
     {
