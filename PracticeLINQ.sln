@@ -11,11 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectionOperations", "Pro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SetOperations", "SetOperations\SetOperations.csproj", "{884FA2BF-34B8-4F39-BDB1-638E391343EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{774C3106-D45F-459B-9F59-973F3902DC16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{774C3106-D45F-459B-9F59-973F3902DC16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorting Data", "Sorting Data\Sorting Data.csproj", "{0D4C36F1-C828-4A0C-AF37-A4CBF63DE8C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorting Data", "Sorting Data\Sorting Data.csproj", "{0D4C36F1-C828-4A0C-AF37-A4CBF63DE8C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quantifier operations", "Quantifier operations\Quantifier operations.csproj", "{2270F134-9C8A-422C-BE85-7C275AE6DBBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quantifier operations", "Quantifier operations\Quantifier operations.csproj", "{2270F134-9C8A-422C-BE85-7C275AE6DBBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartitioningData", "PartitioningData\PartitioningData.csproj", "{C106C6A4-03E6-41EA-B942-9AE6AFF08634}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grouping Data", "Grouping Data\Grouping Data.csproj", "{1FF28158-DED5-46B4-BB52-F2D03D4BC8A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{2270F134-9C8A-422C-BE85-7C275AE6DBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2270F134-9C8A-422C-BE85-7C275AE6DBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2270F134-9C8A-422C-BE85-7C275AE6DBBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C106C6A4-03E6-41EA-B942-9AE6AFF08634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C106C6A4-03E6-41EA-B942-9AE6AFF08634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C106C6A4-03E6-41EA-B942-9AE6AFF08634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C106C6A4-03E6-41EA-B942-9AE6AFF08634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF28158-DED5-46B4-BB52-F2D03D4BC8A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF28158-DED5-46B4-BB52-F2D03D4BC8A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF28158-DED5-46B4-BB52-F2D03D4BC8A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF28158-DED5-46B4-BB52-F2D03D4BC8A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
