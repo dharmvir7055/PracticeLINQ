@@ -1,1 +1,1 @@
-Repo for linq quick refrence
+Repo for LINQ quick refrences
